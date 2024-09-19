@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { publicRequest } from '../utils/requestMethod';
 
 const initialState = {
   loading: false,
@@ -8,18 +8,11 @@ const initialState = {
 
 export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
   try {
-    const response = await axios.post(
-      'https://dummyjson.com/auth/login',
-      data,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await publicRequest.post('/auth/login', data);
     console.log(response);
 
     localStorage.setItem('pear-token', response.data.token);
+    localStorage.setItem('pear-refreshToken', response.data.refreshToken);
 
     return response.data.data;
   } catch (error) {
