@@ -1,4 +1,4 @@
-import { Mail, LockKeyhole } from 'lucide-react';
+import { Mail, LockKeyhole, Loader2 } from 'lucide-react';
 import ctl from '@netlify/classnames-template-literals';
 import LoginImage from '../../assets/Login_image.png';
 import PinkOval from '../../assets/pink.svg';
@@ -6,10 +6,51 @@ import BlueTop from '../../assets/blue-top.svg';
 import BlueBottom from '../../assets/blue-bottom.svg';
 import FormInput from '../../components/formInput/FormInput';
 import Button from '../../components/button/Button';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from './../../utils/routes';
+import {
+  showErrorMessage,
+  showToastMessage,
+} from '../../components/toast/Toast';
+import { Toaster } from 'react-hot-toast';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    if (e.target.name === 'email') {
+      setEmail(e.target.value);
+    } else if (e.target.name === 'password') {
+      setPassword(e.target.value);
+    }
+  };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const submitData = {
+        username: email,
+        password,
+      };
+      await dispatch(login(submitData)).unwrap();
+      showToastMessage('Login successful');
+      navigate(ROUTES.dashboard);
+    } catch (err) {
+      showErrorMessage(err?.response?.data?.message || 'Failed to login');
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className={loginWrapperStyles}>
+      <Toaster />
       {/* Left side*/}
       <div className={leftSideWrapper}>
         <div className='h-[100vh] flex justify-center items-center'>
@@ -31,13 +72,15 @@ const Login = () => {
         <p className='font-semibold text-center text-[#555555] mb-10 '>
           Login into your account
         </p>
-        <form className='space-y-4'>
+        <form className='space-y-4' onSubmit={handleLogin}>
           <FormInput
             name='email'
-            type='email'
+            type='text'
             placeholder='info@example'
             label='Email Id:'
             icon={<Mail className='h-5 w-5 text-white ' />}
+            onChange={handleChange}
+            value={email}
           />
           <FormInput
             name='password'
@@ -45,6 +88,8 @@ const Login = () => {
             placeholder='Enter your password'
             label='Password'
             icon={<LockKeyhole className='h-5 w-5 text-white ' />}
+            onChange={handleChange}
+            value={password}
           />
           <div className='mt-2 text-right underline '>
             <a href='#' className='text-[14px] text-[#1E2772] '>
@@ -53,8 +98,12 @@ const Login = () => {
           </div>
 
           <div>
-            <Button type='submit' variiant='primary'>
-              Login now
+            <Button
+              type='submit'
+              variant='primary'
+              disabled={!email || !password}
+            >
+              {loading ? <Loader2 className='animate-spin' /> : 'Login now'}
             </Button>
           </div>
         </form>
