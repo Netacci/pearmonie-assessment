@@ -6,12 +6,13 @@ const Search = ({ variant = 'primary', ...props }) => {
   const baseStyles = searchStyles;
 
   const variants = {
-    primary: ' bg-white shadow-[0_10px_60px_rgba(226,236,249,0.5)] ',
-    secondary: 'bg-[#F9FBFF] ',
+    primary:
+      ' md:w-[216px] bg-white shadow-[0_10px_60px_rgba(226,236,249,0.5)] ',
+    secondary: 'bg-[#F9FBFF]    md:w-[216px] w-full ',
   };
   const variantStyles = variants[variant] || variants.primary;
   return (
-    <div className='relative'>
+    <div className='relative w-full md:w-[216px]'>
       <SearchIcon className='text-[#9197B3] inset-y-0 absolute top-1/2 left-3 -translate-y-1/2' />
       <input
         type='text'
@@ -24,14 +25,14 @@ const Search = ({ variant = 'primary', ...props }) => {
 };
 
 const searchStyles = ctl(`
-  w-[216px]
+
+
   border 
   py-[10px]  
   rounded-[10px]
   outline-none
   pl-10 
-  text-[10px]
-  md:text-sm 
+  text-sm 
   font-medium 
   focus:outline-none 
   focus:ring-2 

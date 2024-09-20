@@ -27,7 +27,7 @@ const Table = ({
   };
 
   return (
-    <div className='container mx-auto py-4 '>
+    <div className='container  py-4 '>
       <div className='overflow-x-auto '>
         <table className='md:w-full w text-left      '>
           <thead>

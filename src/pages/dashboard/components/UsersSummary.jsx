@@ -87,7 +87,7 @@ const cardWrapperStyles = ctl(`
   flex 
   justify-between
   mr-0
-  md:mr-[35px]
+  md:mr-[45px]
   flex-wrap
   flex-col
   md:flex-row

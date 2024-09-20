@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
     fetchUser();
   }, [dispatch]);
   return (
-    <div className='flex'>
+    <div className='flex overflow-hidden md:overflow-none'>
       <Sidebar user={user} isSidebarVisible={isSidebarVisible} />
       <div className='px-4 md:px-[50px] bg-[#FAFBFF] h-[100vh] w-full'>
         <TopBar

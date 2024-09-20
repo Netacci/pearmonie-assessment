@@ -5,7 +5,7 @@ import Search from '../search/Search.jsx';
 const TopBar = ({ user, isSidebarVisible, setIsSidebarVisible }) => {
   return (
     <div className='flex flex-col md:flex-row items-start md:items-center justify-between pt-4 md:pt-6 px-4 md:px-0 flex-wrap '>
-      <p className='order-1  mt-2 md:mt-0 text-[#000000] text-[16px] md:text-[24px] font-medium'>
+      <p className='order-1  mt-4 md:mt-0 text-[#000000] text-[16px] md:text-[24px] font-medium'>
         Hello {user?.firstName}👋🏽,
       </p>
       <div className='flex justify-between items-center md:order-1 w-full md:w-auto '>
