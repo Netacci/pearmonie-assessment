@@ -1,16 +1,18 @@
 ## Assessment
 
-Visit - []
+Visit - https://pearmonie-assessment.vercel.app/
 
-Login with
+Login with the credentials below or any username and password from https://dummyjson.com/users
 
-Username : Emilys
-Password : Emilyspass
+- Username : emilys
+- Password : emilyspass
 
 To contribute
-Forek repository
-Run npm install
-npm run dev
+Fork repository
+
+- Run npm install
+- npm run dev
 
 To test components
-Run npm run test
+
+- Run npm run test
