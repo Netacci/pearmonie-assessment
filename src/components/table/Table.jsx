@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import Pagination from './Pagination';
-import { pageTableRows } from '../../utils/table';
+import Pagination from './Pagination.jsx';
+import { pageTableRows } from '../../utils/table.js';
 
 const Table = ({
   headers,

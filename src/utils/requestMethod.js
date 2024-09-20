@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ROUTES } from './routes';
+import { ROUTES } from './routes.js';
 
 const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 

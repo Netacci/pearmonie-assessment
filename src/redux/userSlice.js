@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { userRequest } from '../utils/requestMethod';
+import { userRequest } from '../utils/requestMethod.js';
 
 const initialState = {
   loading: false,

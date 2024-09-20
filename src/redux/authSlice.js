@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { publicRequest } from '../utils/requestMethod';
+import { publicRequest } from '../utils/requestMethod.js';
 
 const initialState = {
   loading: false,

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Navigate } from 'react-router-dom';
-import { ROUTES } from '../../utils/routes';
+import { ROUTES } from '../../utils/routes.js';
 
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem('pear-token');

@@ -1,20 +1,20 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Mail, LockKeyhole, Loader2 } from 'lucide-react';
 import ctl from '@netlify/classnames-template-literals';
 import LoginImage from '../../assets/Login_image.png';
 import PinkOval from '../../assets/pink.svg';
 import BlueTop from '../../assets/blue-top.svg';
 import BlueBottom from '../../assets/blue-bottom.svg';
-import FormInput from '../../components/formInput/FormInput';
-import Button from '../../components/button/Button';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../../redux/authSlice';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from './../../utils/routes';
+import FormInput from '../../components/formInput/FormInput.jsx';
+import Button from '../../components/button/Button.jsx';
+import { login } from '../../redux/authSlice.js';
+import { ROUTES } from './../../utils/routes.js';
 import {
   showErrorMessage,
   showToastMessage,
-} from '../../components/toast/Toast';
+} from '../../components/toast/Toast.jsx';
 import { Toaster } from 'react-hot-toast';
 
 const Login = () => {

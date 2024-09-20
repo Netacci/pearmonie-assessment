@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ROUTES } from './utils/routes';
-import PrivateRoute from './components/privateRoute/privateRoute';
-import Loader from './components/loader/Loader';
+import { ROUTES } from './utils/routes.js';
+import PrivateRoute from './components/privateRoute/PrivateRoute.jsx';
+import Loader from './components/loader/Loader.jsx';
 
-const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
-const Login = lazy(() => import('./pages/auth/Login'));
+const Dashboard = lazy(() => import('./pages/dashboard/Dashboard.jsx'));
+const Login = lazy(() => import('./pages/auth/Login.jsx'));
 
 const App = () => {
   return (

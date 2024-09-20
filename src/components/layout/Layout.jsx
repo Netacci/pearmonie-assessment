@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
-import Sidebar from './SideBar';
+import Sidebar from './SideBar.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../redux/userSlice';
-import TopBar from './TopBar';
+import TopBar from './TopBar.jsx';
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.user);

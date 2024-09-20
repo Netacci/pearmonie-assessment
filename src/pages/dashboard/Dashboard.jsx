@@ -1,7 +1,7 @@
-import Layout from '../../components/layout/Layout';
-import UsersSummary from './components/UsersSummary';
+import Layout from '../../components/layout/Layout.jsx';
+import UsersSummary from './components/UsersSummary.jsx';
 
-import UsersTable from './components/UsersTable';
+import UsersTable from './components/UsersTable.jsx';
 
 const Dashboard = () => {
   return (

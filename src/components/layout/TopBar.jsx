@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Menu, X } from 'lucide-react';
-import Search from '../search/Search';
+import Search from '../search/Search.jsx';
 
 const TopBar = ({ user, isSidebarVisible, setIsSidebarVisible }) => {
   return (

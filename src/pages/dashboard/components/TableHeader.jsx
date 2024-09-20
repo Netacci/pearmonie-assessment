@@ -1,5 +1,5 @@
 import ctl from '@netlify/classnames-template-literals';
-import Search from '../../../components/search/Search';
+import Search from '../../../components/search/Search.jsx';
 import { ChevronDown } from 'lucide-react';
 
 const TableHeader = () => {

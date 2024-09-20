@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from 'react';
-import Table from '../../../components/table/Table';
-import TableHeader from './TableHeader';
+import Table from '../../../components/table/Table.jsx';
+import TableHeader from './TableHeader.jsx';
 import ctl from '@netlify/classnames-template-literals';
-import { getAllUsers } from '../../../redux/userSlice';
+import { getAllUsers } from '../../../redux/userSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader2 } from 'lucide-react';
 
