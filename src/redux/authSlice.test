@@ -1,0 +1,74 @@
+/**
+ * @jest-environment jsdom
+ */
+
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer, { login } from './authSlice';
+import { publicRequest } from '../utils/__mock__/requestMethod';
+import { jest } from '@jest/globals';
+
+// Mock the publicRequest module
+jest.mock('../utils/__mock__/requestMethod');
+
+describe('auth slice', () => {
+  let store;
+
+  beforeEach(() => {
+    store = configureStore({
+      reducer: {
+        auth: authReducer,
+      },
+    });
+  });
+
+  it('should handle initial state', () => {
+    expect(store.getState().auth).toEqual({
+      loading: false,
+      error: null,
+    });
+  });
+
+  describe('login async thunk', () => {
+    it('should handle successful login', async () => {
+      const mockData = { email: 'test@example.com', password: 'password123' };
+      const mockResponse = {
+        data: {
+          token: 'mock-token',
+          refreshToken: 'mock-refresh-token',
+          data: { id: 1, name: 'Test User' },
+        },
+      };
+
+      publicRequest.post.mockResolvedValue(mockResponse);
+
+      await store.dispatch(login(mockData));
+
+      expect(publicRequest.post).toHaveBeenCalledWith('/auth/login', mockData);
+      expect(localStorage.getItem('pear-token')).toBe('mock-token');
+      expect(localStorage.getItem('pear-refreshToken')).toBe(
+        'mock-refresh-token'
+      );
+
+      const state = store.getState().auth;
+      expect(state.loading).toBe(false);
+      expect(state.user).toEqual({ id: 1, name: 'Test User' });
+      expect(state.error).toBeNull();
+    });
+
+    it('should handle login failure', async () => {
+      const mockData = { email: 'test@example.com', password: 'wrongpassword' };
+      const mockError = new Error('Invalid credentials');
+
+      publicRequest.post.mockRejectedValue(mockError);
+
+      await store.dispatch(login(mockData));
+
+      expect(publicRequest.post).toHaveBeenCalledWith('/auth/login', mockData);
+
+      const state = store.getState().auth;
+      expect(state.loading).toBe(false);
+      expect(state.user).toBeUndefined();
+      expect(state.error).toBe(mockError);
+    });
+  });
+});

@@ -9,11 +9,22 @@ const initialState = {
   users: [],
 };
 
-export const getUser = createAsyncThunk(
-  'auth/register',
-  async (data, thunkAPI) => {
+export const getUser = createAsyncThunk('user/single', async (_, thunkAPI) => {
+  try {
+    const response = await userRequest.get('/auth/me');
+
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+export const getAllUsers = createAsyncThunk(
+  'users/all',
+  async ({ limit, page }, thunkAPI) => {
     try {
-      const response = await userRequest.get('/auth/me');
+      const response = await userRequest.get(
+        `/users?limit=${limit}&skip=${page}`
+      );
 
       return response.data;
     } catch (error) {
@@ -28,7 +39,6 @@ export const userSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
-    //  handling login action
     builder
       .addCase(getUser.pending, (state) => {
         state.loading = true;
@@ -40,7 +50,19 @@ export const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Login failed';
+        state.error = action.payload;
+      })
+      .addCase(getAllUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = action.payload;
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

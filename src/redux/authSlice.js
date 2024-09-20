@@ -9,7 +9,6 @@ const initialState = {
 export const login = createAsyncThunk('auth/login', async (data, thunkAPI) => {
   try {
     const response = await publicRequest.post('/auth/login', data);
-    console.log(response);
 
     localStorage.setItem('pear-token', response.data.token);
     localStorage.setItem('pear-refreshToken', response.data.refreshToken);

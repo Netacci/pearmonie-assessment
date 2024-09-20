@@ -40,11 +40,9 @@ userRequest.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refreshToken = localStorage.getItem('pear-refreshToken');
-        const response = await axios.post('/auth/refresh', {
+        const response = await axios.post(`${BASE_URL}/auth/refresh`, {
           refreshToken,
         });
-
-        console.log(response);
 
         localStorage.setItem('pear-token', response.data.token);
 

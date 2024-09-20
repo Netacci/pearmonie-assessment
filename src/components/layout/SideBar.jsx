@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+
 import {
   HelpCircle,
   ChevronRight,
@@ -8,14 +8,15 @@ import {
   SquareUser,
   ChevronDown,
 } from 'lucide-react';
+import ctl from '@netlify/classnames-template-literals';
+import { useState } from 'react';
+// import Avatar from '../../assets/avatar.png';
 
-const Sidebar = ({ user }) => {
+const Sidebar = ({ user, isSidebarVisible }) => {
   const [isExpanded, setIsExpanded] = useState(true);
-
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
   };
-
   const navList = [
     {
       name: 'Users',
@@ -29,18 +30,16 @@ const Sidebar = ({ user }) => {
 
   return (
     <div
-      className={`bg-white h-screen transition-all duration-300 ${
+      className={`bg-white shadow-[0_10px_60px_rgba(226,236,249,0.5)] h-screen transition-all duration-300 ${
         isExpanded ? 'w-[306px] px-[28px]' : 'w-[102px]'
-      } flex flex-col shadow-lg`}
+      } flex flex-col ${
+        isSidebarVisible ? 'absolute z-10 left-0 top-0' : 'hidden'
+      }
+    md:flex`}
     >
       <div className='flex items-center pt-6 pb-4 justify-center'>
         <Bolt className='h-[37px] w-[37px]' />
 
-        {/* {isExpanded && (
-          <p className='ml-2 font-semibold'>
-            Dashboard <span className=' '>v0.1</span>
-          </p>
-        )} */}
         <div
           className={`ml-[8px] whitespace-nowrap overflow-hidden transition-all duration-300 ${
             isExpanded ? 'w-60' : 'w-0'
@@ -97,7 +96,7 @@ const Sidebar = ({ user }) => {
         </ul>
       </nav>
       {isExpanded ? (
-        <div className='bg-gradient-to-r from-[#EAABF0] to-[#4925E9] p-6 rounded-[20px] opacity-100 transition-all duration-300 '>
+        <div className={proBoxStyles}>
           <p className='text-white text-[14px]  text-center font-semibold '>
             Upgrade to PRO to get access to all Features
           </p>
@@ -125,7 +124,9 @@ const Sidebar = ({ user }) => {
                 <p className='text-[14px] font-medium text-black'>
                   {user?.firstName}
                 </p>
-                <p className='text-[12px] text-[#757575]'>Project Manager</p>
+                <p className='text-[12px] text-[#757575]'>
+                  {user?.company?.title}
+                </p>
               </div>
             </div>
             <ChevronDown size={20} className='text-[#9197B3]' />
@@ -135,12 +136,18 @@ const Sidebar = ({ user }) => {
 
       <button
         onClick={toggleSidebar}
-        className='p-2 m-4 rounded-full bg-gray-200 hover:bg-gray-300 self-end'
+        className={`p-2 my-6 rounded-full bg-gray-200 hover:bg-gray-300 self-end ${
+          isExpanded ? 'mx-0' : 'mx-auto'
+        }`}
       >
         {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
       </button>
     </div>
   );
 };
+
+const proBoxStyles = ctl(
+  `bg-gradient-to-r from-[#EAABF0] to-[#4925E9] p-6 rounded-[20px] opacity-100 transition-all duration-300 `
+);
 
 export default Sidebar;
