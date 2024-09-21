@@ -48,10 +48,10 @@ userRequest.interceptors.response.use(
 
         userRequest.defaults.headers.common[
           'Authorization'
-        ] = `Bearer ${response.data.token}`;
+        ] = `Bearer ${response.data.accessToken}`;
         originalRequest.headers[
           'Authorization'
-        ] = `Bearer ${response.data.token}`;
+        ] = `Bearer ${response.data.accessToken}`;
 
         return userRequest(originalRequest);
       } catch (error) {
