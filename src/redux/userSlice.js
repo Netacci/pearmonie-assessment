@@ -21,9 +21,10 @@ export const getUser = createAsyncThunk('user/single', async (_, thunkAPI) => {
 export const getAllUsers = createAsyncThunk(
   'users/all',
   async ({ limit, page }, thunkAPI) => {
+    const skip = (page - 1) * limit;
     try {
       const response = await userRequest.get(
-        `/users?limit=${limit}&skip=${page}`
+        `/users?limit=${limit}&skip=${skip}`
       );
 
       return response.data;
