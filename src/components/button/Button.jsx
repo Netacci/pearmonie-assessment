@@ -6,7 +6,8 @@ const Button = ({ children, type = 'button', variant, ...props }) => {
   const baseStyles = btnStyles;
 
   const variants = {
-    primary: 'text-white bg-[#1E2772] border-transparent focus:ring-[#1E2772]',
+    primary:
+      'text-white bg-[#1E2772] border-transparent focus:ring-[#1E2772] shadow-[0_12.1167px_24.2334px_rgba(1,11,253,0.12)]',
     secondary: 'text-[#1E2772] bg-white border-[#1E2772] focus:ring-[#1E2772]',
   };
   const variantStyles = variants[variant] || variants.primary;
