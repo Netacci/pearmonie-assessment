@@ -44,7 +44,7 @@ userRequest.interceptors.response.use(
           refreshToken,
         });
 
-        localStorage.setItem('pear-token', response.data.token);
+        localStorage.setItem('pear-token', response.data.accessToken);
 
         userRequest.defaults.headers.common[
           'Authorization'
